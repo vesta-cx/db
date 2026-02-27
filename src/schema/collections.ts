@@ -24,12 +24,8 @@ export const COLLECTION_TYPES = [
 ] as const;
 export type CollectionType = (typeof COLLECTION_TYPES)[number];
 
-export const COLLECTION_VISIBILITY = [
-	"public",
-	"private",
-	"followers-only",
-] as const;
-export type CollectionVisibility = (typeof COLLECTION_VISIBILITY)[number];
+export const COLLECTION_STATUSES = ["LISTED", "UNLISTED"] as const;
+export type CollectionStatus = (typeof COLLECTION_STATUSES)[number];
 
 export const COLLECTION_ITEM_TYPES = [
 	"resource",
@@ -61,9 +57,9 @@ export const collections = sqliteTable("collections", {
 	isProtected: integer("is_protected", { mode: "boolean" })
 		.notNull()
 		.default(false),
-	visibility: text("visibility", { enum: COLLECTION_VISIBILITY })
+	status: text("status", { enum: COLLECTION_STATUSES })
 		.notNull()
-		.default("public"),
+		.default("LISTED"),
 	createdAt: integer("created_at", { mode: "timestamp" })
 		.notNull()
 		.$defaultFn(() => new Date()),
@@ -94,26 +90,6 @@ export const collectionItems = sqliteTable(
 				table.itemType,
 				table.itemId,
 			],
-		}),
-	],
-);
-
-export const collectionVisibilitySettings = sqliteTable(
-	"collection_visibility_settings",
-	{
-		collectionId: text("collection_id")
-			.notNull()
-			.references(() => collections.id),
-		engagementType: text("engagement_type", {
-			enum: ENGAGEMENT_FILTER_ACTIONS,
-		}).notNull(),
-		isVisible: integer("is_visible", { mode: "boolean" })
-			.notNull()
-			.default(true),
-	},
-	(table) => [
-		primaryKey({
-			columns: [table.collectionId, table.engagementType],
 		}),
 	],
 );
@@ -149,7 +125,6 @@ export const collectionItemFilters = sqliteTable(
 
 export const collectionsRelations = relations(collections, ({ many }) => ({
 	items: many(collectionItems),
-	visibilitySettings: many(collectionVisibilitySettings),
 	itemFilters: many(collectionItemFilters),
 }));
 
@@ -158,16 +133,6 @@ export const collectionItemsRelations = relations(
 	({ one }) => ({
 		collection: one(collections, {
 			fields: [collectionItems.collectionId],
-			references: [collections.id],
-		}),
-	}),
-);
-
-export const collectionVisibilitySettingsRelations = relations(
-	collectionVisibilitySettings,
-	({ one }) => ({
-		collection: one(collections, {
-			fields: [collectionVisibilitySettings.collectionId],
 			references: [collections.id],
 		}),
 	}),

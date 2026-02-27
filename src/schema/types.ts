@@ -15,3 +15,9 @@ export type ResourceStatus = (typeof RESOURCE_STATUSES)[number];
 
 export const AUTHOR_TYPES = ["user", "workspace"] as const;
 export type AuthorType = (typeof AUTHOR_TYPES)[number];
+
+export const EXTERNAL_LINK_SUBJECT_TYPES = [
+	"resource",
+	"workspace",
+] as const;
+export type ExternalLinkSubjectType = (typeof EXTERNAL_LINK_SUBJECT_TYPES)[number];
