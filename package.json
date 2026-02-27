@@ -1,36 +1,41 @@
 {
-    "name": "@vesta-cx/db",
-    "version": "0.0.1",
-    "description": "Shared Drizzle ORM schema for vesta D1 database",
-    "type": "module",
-    "main": "dist/index.js",
-    "scripts": {
-        "build": "tsc",
-        "dev": "tsc --watch",
-        "lint": "eslint .",
-        "format": "prettier --write .",
-        "db:generate": "drizzle-kit generate",
-        "db:studio": "drizzle-kit studio"
+  "name": "@vesta-cx/db",
+  "version": "0.0.1",
+  "description": "Shared Drizzle ORM schema for vesta D1 database",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
     },
-    "exports": {
-        ".": {
-            "types": "./dist/index.d.ts",
-            "import": "./dist/index.js"
-        },
-        "./schema": {
-            "types": "./dist/schema/index.d.ts",
-            "import": "./dist/schema/index.js"
-        }
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "packageManager": "pnpm@10.20.0",
-    "dependencies": {
-        "drizzle-orm": "^0.45.1"
-    },
-    "devDependencies": {
-        "drizzle-kit": "^0.31.8",
-        "typescript": "^5.9.3"
+    "./schema": {
+      "types": "./dist/schema/index.d.ts",
+      "import": "./dist/schema/index.js"
     }
+  },
+  "main": "dist/index.js",
+  "scripts": {
+    "clean": "cleanc clean",
+    "build:clean": "pnpm run clean && pnpm run build",
+    "dev:clean": "pnpm run clean && pnpm run dev",
+    "install:clean": "pnpm run clean && node -e \"try{require('fs').rmSync(require('path').join(process.cwd(),'node_modules'),{recursive:true,force:true})}catch(_){}\" && pnpm i",
+    "build": "tsc",
+    "db:generate": "drizzle-kit generate",
+    "db:studio": "drizzle-kit studio",
+    "dev": "tsc --watch",
+    "format": "prettier --write .",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.45.1"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.31.8",
+    "prettier": "^3.8.1",
+    "typescript": "^5.9.3"
+  },
+  "packageManager": "pnpm@10.20.0"
 }
