@@ -16,10 +16,6 @@ import {
 	AUTHOR_TYPES,
 } from "./types";
 
-export type ResourceType = (typeof RESOURCE_TYPES)[number];
-export type ResourceStatus = (typeof RESOURCE_STATUSES)[number];
-export type AuthorType = (typeof AUTHOR_TYPES)[number];
-
 export const resources = sqliteTable("resources", {
 	id: text("id")
 		.primaryKey()

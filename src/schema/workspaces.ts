@@ -6,9 +6,6 @@ import { users } from "./users";
 import { resources } from "./resources";
 import { OWNER_TYPES, VISIBILITY_TYPES } from "./types";
 
-export type OwnerType = (typeof OWNER_TYPES)[number];
-export type VisibilityType = (typeof VISIBILITY_TYPES)[number];
-
 export const workspaces = sqliteTable("workspaces", {
 	id: text("id")
 		.primaryKey()
