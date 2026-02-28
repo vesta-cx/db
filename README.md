@@ -59,6 +59,13 @@ const db = getDb(platform);
 const rows = await db.select().from(resources).where(eq(resources.status, "LISTED"));
 ```
 
+## Implementation contracts and type semantics
+
+Documentation that consumers must follow (no code in this package):
+
+- [Collection type and kind](./docs/collection-types.md) — Contract: `type` (static | manual | smart) and `kind` (semantic); exactly one static per kind per owner, created with owner, cannot delete without deleting owner. Not yet in schema.
+- [Collection visibility and dashboard resource reads](./docs/collection-visibility-and-dashboard-contract.md) — When `resources.status` (LISTED/UNLISTED) applies; recursive visibility; dashboard reads from `resources` table only.
+
 ## Migrations
 
 Migrations live in this package. Consuming apps point Drizzle Kit at their local schema re-export and at a shared or local migrations directory. Apply with `wrangler d1 migrations apply` (Cloudflare) or your runtime’s migration runner.
