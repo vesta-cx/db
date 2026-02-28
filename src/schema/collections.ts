@@ -13,6 +13,7 @@ export const COLLECTION_OWNER_TYPES = ["user", "workspace"] as const;
 export type CollectionOwnerType = (typeof COLLECTION_OWNER_TYPES)[number];
 
 export const COLLECTION_TYPES = [
+	"resources",
 	"following",
 	"reposts",
 	"likes",
