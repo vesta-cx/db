@@ -1,10 +1,17 @@
 {
   "name": "@vesta-cx/db",
   "version": "0.0.1",
-  "description": "Shared Drizzle ORM schema for vesta D1 database",
-  "keywords": [],
+  "description": "Shared Drizzle ORM schema and entity schemas for Vesta D1. Export-only; consumers create their own getDb(platform) factory.",
+  "keywords": [
+    "drizzle",
+    "drizzle-orm",
+    "d1",
+    "cloudflare",
+    "schema",
+    "vesta"
+  ],
   "license": "ISC",
-  "author": "",
+  "author": "vesta-cx",
   "type": "module",
   "exports": {
     ".": {
@@ -42,5 +49,18 @@
     "prettier": "^3.8.1",
     "typescript": "^5.9.3"
   },
-  "packageManager": "pnpm@10.20.0"
+  "packageManager": "pnpm@10.20.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vesta-cx/db.git"
+  },
+  "homepage": "https://github.com/vesta-cx/db#readme",
+  "bugs": {
+    "url": "https://github.com/vesta-cx/db/issues"
+  },
+  "files": [
+    "dist",
+    "schema",
+    "drizzle"
+  ]
 }
