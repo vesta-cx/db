@@ -21,7 +21,7 @@ export type SubjectType = (typeof SUBJECT_TYPES)[number];
 
 export const STATIC_SUBJECT_IDS = [
 	"guest",
-	"user",
+	"authenticated",
 	"follower",
 	"subscriber",
 ] as const;
